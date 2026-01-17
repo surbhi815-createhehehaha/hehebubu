@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>bubu ke liye surprise ❤️</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&family=Inter&display=swap" rel="stylesheet">
+
+<style>
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  color: #ffffff;
+  overflow-x: hidden;
+
+  background: 
+    linear-gradient(
+      rgba(0, 0, 0, 0.55),
+      rgba(0, 0, 0, 0.55)
+    ),
+    url("background.jpg");
+
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+section {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 40px;
+}
+
+.card {
+  max-width: 700px;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(8px);
+  padding: 40px;
+  border-radius: 20px;
+}
+
+h1, h2 {
+  font-family: 'Playfair Display', serif;
+}
+
+button {
+  padding: 12px 24px;
+  border: none;
+  background: #ff6f91;
+  color: white;
+  font-size: 16px;
+  border-radius: 30px;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+button:hover {
+  background: #ff4f7b;
+}
+
+.type {
+  border-right: 2px solid #333;
+  white-space: nowrap;
+  overflow: hidden;
+  display: inline-block;
+}
+
+.heart {
+  position: fixed;
+  bottom: -10px;
+  font-size: 24px;
+  animation: float 6s linear infinite;
+}
+
+@keyframes float {
+  from { transform: translateY(0); opacity: 1; }
+  to { transform: translateY(-110vh); opacity: 0; }
+}
+
+.gallery img {
+  width: 150px;
+  border-radius: 12px;
+  margin: 10px;
+}
+
+.hidden {
+  display: none;
+}
+
+.countdown {
+  font-size: 28px;
+  margin-top: 20px;
+}
+</style>
+</head>
+
+<body>
+<audio id="bgMusic" loop>
+  <source src="song.mp3" type="audio/mpeg">
+</audio>
+
+<!-- Scene 1 -->
+<section>
+  <div class="card">
+    <h1 id="sorryText"></h1>
+    <button onclick="showLove()">Click if you love me😗</button>
+  </div>
+</section>
+
+<!-- Scene 2 -->
+<section id="loveSection" class="hidden">
+  <div class="card">
+    <h2>I love you most😘❤️</h2>
+    <p>I know I and you have made mistakes, but i have loved you even on those days and still do. And i am sorry that i made your problems and emotions feel unsafe around me that you hide it now, i want us to be vulnerable and true to each other. I miss you soo much 😭. </p>
+  </div>
+</section>
+
+<!-- Scene 3 -->
+<section>
+  <div class="card gallery">
+    <h2>Us 🥰🤗🫶</h2>
+    <!-- Replace with your images -->
+    <img src="huhu.jpeg">
+    <img src="haha.jpeg">
+    <img src="hoho.jpeg"> 
+    <img src="hehe.jpeg">
+  </div>
+</section>
+
+<!-- Scene 5 -->
+<section>
+  <div class="card">
+    <h2>Surprise Date Countdown ⏳</h2>
+    <div class="countdown" id="timer"></div>
+    <p>Be ready. Dont Forget😘 .</p>
+  </div>
+</section>
+
+<script>
+// Typewriter apology
+const text = "❤️I love youuuuu bubu❤️😚.";
+let i = 0;
+const speed = 80;
+const target = document.getElementById("sorryText");
+
+function typeWriter() {
+  if (i < text.length) {
+    target.innerHTML += text.charAt(i);
+    target.classList.add("type");
+    i++;
+    setTimeout(typeWriter, speed);
+  }
+}
+typeWriter();
+
+// Show love + hearts
+function showLove() {
+  document.getElementById("loveSection").classList.remove("hidden");
+
+  // play background music
+  const music = document.getElementById("bgMusic");
+  music.volume = 0;
+music.play();
+
+let v = 0;
+const fadeIn = setInterval(() => {
+  if (v < 0.4) {
+    v += 0.02;
+    music.volume = v;
+  } else {
+    clearInterval(fadeIn);
+  }
+}, 200);
+
+  for (let i = 0; i < 20; i++) {
+    const heart = document.createElement("div");
+    heart.className = "heart";
+heart.innerHTML = "🥰❤️";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.animationDuration = 3 + Math.random() * 3 + "s";
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 30000);
+  }
+}
+
+// Countdown timer (SET YOUR DATE)
+const targetDate = new Date("2026-02-14T21:30:00").getTime();
+
+setInterval(() => {
+  const now = new Date().getTime();
+  const diff = targetDate - now;
+
+  if (diff > 0) {
+   const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+   const h = Math.floor((diff / (1000 * 60 * 60)) % 24);
+   const m = Math.floor((diff / (1000 * 60)) % 60);
+   const s = Math.floor((diff / 1000) % 60);
+
+document.getElementById("timer").innerHTML =
+  `${d}d ${h}h ${m}m ${s}s`;
+  } else {
+    document.getElementById("timer").innerHTML =
+      "It’s time ❤️";
+  }
+}, 1000);
+</script>
+
+</body>
+
+</html>
